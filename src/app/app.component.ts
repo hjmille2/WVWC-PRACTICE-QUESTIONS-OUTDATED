@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'question-app-v2';
+  title = 'WVWC CS PRACTICE QUESTIONS';
 }

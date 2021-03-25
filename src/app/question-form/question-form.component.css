@@ -1,0 +1,44 @@
+#AddQuestionForm {
+    display: table; 
+    margin: 50px auto; 
+}
+
+.textInputBox {
+    margin: 10px; 
+}
+
+#submitButton {
+    float: right; 
+}
+
+#SelectQType {
+    margin-top: 50px; 
+    margin-left: 25px; 
+
+}
+
+
+#QuestionForm {
+    margin-left: 50px; 
+    display: block; 
+}
+
+#removeButton {
+    margin: 10px; 
+}
+
+#tableHeader{
+    font-weight: normal !important; 
+}
+
+.buttonCell{
+     vertical-align: bottom;
+}
+
+.tableButton {
+    width: 75px; 
+}
+
+.submitButton {
+    float: right; 
+}

@@ -1,0 +1,14 @@
+.questions {
+    display: table; 
+    margin: 20px auto; 
+    width: 600px; 
+}
+
+.answerButton {
+    float: right; 
+}
+
+.topic {
+    margin: 15px; 
+}
+

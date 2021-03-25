@@ -1,6 +1,6 @@
 {
   "name": "question-app-v2",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,13 +12,18 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.6",
+    "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.1.6",
     "@angular/compiler": "~9.1.6",
     "@angular/core": "~9.1.6",
     "@angular/forms": "~9.1.6",
+    "@angular/material": "^9.2.4",
     "@angular/platform-browser": "~9.1.6",
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
+    "bootstrap": "^5.0.0-beta2",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -42,5 +47,9 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.",
+  "main": "karma.conf.js",
+  "author": "",
+  "license": "ISC"
 }
