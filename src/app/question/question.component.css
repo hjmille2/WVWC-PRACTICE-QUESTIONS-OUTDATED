@@ -12,3 +12,12 @@
     margin: 15px; 
 }
 
+.questionHeader {  
+    display: flex; 
+}
+
+.shortAnswerSolution{
+    margin-top: 50px; 
+}
+
+

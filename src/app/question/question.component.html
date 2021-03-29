@@ -1,8 +1,11 @@
 
-
+<div class='questionHeader'>
+    <button class='btn btn-primary backButton' (click)='backClicked()'>Back</button>
+    <h3 class="topic">Topic</h3>
+</div>
 
 <div id="multChoiceQ" *ngIf='questionType==="mult_choice"'>
-    <h3 class="topic">Topic</h3>
+
     <div class='questions'>
         <p>{{question.question}}</p>
         <div class="question-radio-buttons form-check" *ngFor='let opt of mult_choice_options'>
@@ -23,11 +26,19 @@
 </div>
 
 <div id="shortAnsQ" *ngIf='questionType==="short_ans"'>
-    <h3 class="topic">Topic</h3>
     <div class='questions'>
         <p>{{question.question}}</p>
         <textarea class='form-control' [(ngModel)]='shortAnsSubmission'></textarea>
-        <button class='btn btn-primary btn-sm answerButton' (click)='shortAnsSubmit()'>Show Answer</button>
+        <div *ngIf='showShortAns === false'>
+            <button class='btn btn-primary btn-sm answerButton' (click)='shortAnsSubmit()'>Show Solution</button>
+        </div>
+        <div *ngIf='showShortAns === true'>
+            <button class='btn btn-primary btn-sm answerButton' (click)='shortAnsSubmit()'>Hide Solution</button>
+        </div>
+
+        <div *ngIf='showShortAns === true' class='shortAnswerSolution'>
+            <p>{{question.correct_ans}}</p>
+        </div>
     </div>
 </div>
 

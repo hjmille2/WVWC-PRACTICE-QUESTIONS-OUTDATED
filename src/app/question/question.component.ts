@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { QuestionService } from '../services/question.service'
+import { QuestionService } from '../services/question.service'; 
+import { Location } from '@angular/common'; 
 
 @Component({
   selector: 'app-question',
@@ -15,11 +16,12 @@ export class QuestionComponent implements OnInit {
   correctSelection:boolean; 
 
   shortAnsSubmission: string;
-  showShortAns = 'false'; 
+  showShortAns: boolean; 
 
   mult_choice_options; 
 
-  constructor(private qService : QuestionService) {
+  constructor(private qService : QuestionService, private _location: Location) {
+    this.showShortAns = false; 
    }
 
   ngOnInit(): void {
@@ -58,7 +60,11 @@ export class QuestionComponent implements OnInit {
   }
 
   shortAnsSubmit(){
-    !this.showShortAns; 
+    this.showShortAns = !this.showShortAns;   
+  }
+
+  backClicked(){
+    this._location.back(); 
   }
 
 }
