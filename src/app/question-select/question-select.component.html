@@ -1,6 +1,6 @@
 <div>
     <ul >
-        <li *ngFor='let q of questions; let i = index' (click)='openQuestion(i)'>{{q.question}}</li>
+        <li *ngFor='let q of questions$ | async;'><a routerLink='/question' (click)='openQuestion(q)'>{{q.question}}</a></li>
     </ul>
 </div>
 

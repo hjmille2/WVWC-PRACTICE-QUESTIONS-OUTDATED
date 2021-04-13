@@ -1,10 +1,10 @@
 
 <div class='questionHeader'>
     <button class='btn btn-primary backButton' (click)='backClicked()'>Back</button>
-    <h3 class="topic">Topic</h3>
+    <h3 class="topic">{{question.class}} - {{question.category}}</h3>
 </div>
 
-<div id="multChoiceQ" *ngIf='questionType==="mult_choice"'>
+<div id="multChoiceQ" *ngIf='question.question_type==="mult_choice"'>
 
     <div class='questions'>
         <p>{{question.question}}</p>
@@ -25,7 +25,7 @@
     </div>
 </div>
 
-<div id="shortAnsQ" *ngIf='questionType==="short_ans"'>
+<div id="shortAnsQ" *ngIf='question.question_type==="short_ans"'>
     <div class='questions'>
         <p>{{question.question}}</p>
         <textarea class='form-control' [(ngModel)]='shortAnsSubmission'></textarea>
@@ -37,7 +37,7 @@
         </div>
 
         <div *ngIf='showShortAns === true' class='shortAnswerSolution'>
-            <p>{{question.correct_ans}}</p>
+            <p>{{questionSpecific.answer}}</p>
         </div>
     </div>
 </div>
