@@ -1,0 +1,10 @@
+.HeaderButtons {
+    display: inline; 
+    margin: 2px; 
+}
+
+#EditButton {
+    float: right;
+}
+
+

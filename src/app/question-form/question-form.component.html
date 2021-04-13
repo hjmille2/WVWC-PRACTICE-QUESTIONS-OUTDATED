@@ -1,0 +1,63 @@
+<div id="Header">
+    <app-header></app-header>
+</div>
+
+<div>
+    <div id="SelectQType">
+        <select class='custom-select' [(ngModel)]='questionType'>
+            <option value='mult_choice'>Multiple Choice</option>
+            <option value='short_ans'>Short Answer</option>
+        </select>
+
+    </div>
+
+    <div id="QuestionForm">
+        <div *ngIf="questionType==='mult_choice'">
+            <form>
+                <div class='form-group'>
+                    <label for='multChoiceQuestion'>Question:</label>
+                    <textarea class='form-control' rows='3' required id='multChoiceQuestion'></textarea>
+                </div>
+
+                <div class='form-group'>
+                    <label for='correctAnswerMultChoice'>Correct Answer:</label>
+                    <input type='text' class='form-control' id='correctAnswerMultChoice'>
+                </div>
+
+                <div class='form-group'>
+                    <table class='table'>
+                        <tr>
+                            <th id='tableHeader'>Other Answer Options:
+                            </th>
+                            
+                            <th class='buttonCell'><button class='btn btn-outline-success btn-sm tableButton' (click)='addOption()' [disabled]='options().length > 2'>Add</button></th>
+                        </tr>
+                        <tr *ngFor='let o of options().controls; let i=index'>
+                            <td>
+                                Option {{i+1}}
+                                <input type='text' class='form-control'>
+                            </td>
+                            <td class='buttonCell'>
+                                <button (click)='removeOption(i)' class='btn btn-outline-danger btn-sm tableButton' [disabled]='options().length === 1'>Remove</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                    </table>
+                </div>
+
+                <div class='form-group'>
+                    <label for='explanationMultChoice'>Explanation</label>
+                    <textarea class='form-control' rows='3'></textarea>
+                </div>
+
+                <button type='submit' class='btn btn-primary submitButton'>Submit</button>
+            </form>
+        </div>
+
+        <div *ngIf="questionType === 'short_ans'">
+
+        </div>
+    </div>
+    
+</div>
