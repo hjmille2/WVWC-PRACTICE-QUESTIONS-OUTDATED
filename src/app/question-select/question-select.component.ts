@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { QuestionService } from '../services/question.service'
+import { Observable } from 'rxjs'; 
+
+import { Question } from '../models/question';
+
+import { QuestionService } from '../services/question.service';
+import { QuestionsCrudService } from '../services/questions-crud.service';
 
 @Component({
   selector: 'app-question-select',
@@ -10,18 +15,17 @@ import { QuestionService } from '../services/question.service'
 })
 export class QuestionSelectComponent implements OnInit {
 
-  questions = [];
+  questions$: Observable<Question[]>;
   selected: boolean;  
 
-  constructor(private qService : QuestionService, private router : Router) { }
+  constructor(private router : Router, private questionCrudService: QuestionsCrudService, private qService : QuestionService) { }
 
   ngOnInit(): void {
-    this.questions = this.qService.getAllQuestions(); 
+    this.questions$ = this.questionCrudService.fetchAll();  
   }
 
-  openQuestion(index){
-    this.qService.setIndex(index); 
-    this.router.navigate(['/question']); 
+  openQuestion(q){
+    this.qService.selectedQuestion = q;  
   }
 
 
