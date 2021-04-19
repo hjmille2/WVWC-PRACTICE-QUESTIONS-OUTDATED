@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 
 import { Question } from '../models/question'; 
 import { MultipleChoiceQuestion } from '../models/multChoiceQuestion'; 
 import { ShortAnsQuestion } from '../models/shortAnsQuestions'; 
 
 import { Observable } from 'rxjs';
-import { catchError, tap} from 'rxjs/operators'; 
+import { catchError, tap, map} from 'rxjs/operators'; 
+import { ErrorHandlerService } from './error-handler.service';
 
 
 @Injectable({
@@ -17,13 +18,20 @@ export class QuestionsCrudService {
 
   private url = "http://localhost:3000/questions"; 
 
-  constructor(private http: HttpClient) { }
+  httpOptions : {headers: HttpHeaders} = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  }
+
+  constructor(private http: HttpClient, private errorHandlerService:ErrorHandlerService) { }
 
   fetchAll(): Observable<Question[]> {
     return this.http
       .get<Question[]>(this.url, { responseType: 'json'})
       .pipe(
-        tap((_) => console.log('fetched questions'))
+        tap((_) => console.log('fetched questions')),
+        catchError(
+          this.errorHandlerService.handleError<Question[]>('fetchAll', []) 
+        )
     ); 
   }
 
@@ -44,4 +52,24 @@ export class QuestionsCrudService {
       ); 
     }
   }
+
+  postMultChoiceQuestion(bodyData){
+    const requestUrl = `${this.url}/addQuestion/mult_choice`; 
+    return this.http.post(requestUrl, bodyData, this.httpOptions).pipe(
+      catchError(
+        this.errorHandlerService.handleError<any>("post")
+      )
+    );
+
+  }
+
+  postShortAnsQuestion(bodyData){
+    const requestUrl = `${this.url}/addQuestion/short_ans`; 
+    return this.http.post(requestUrl, bodyData, this.httpOptions).pipe(
+      catchError(
+        this.errorHandlerService.handleError<any>('post')
+      )
+    ); 
+  }
+
 }

@@ -14,6 +14,7 @@ import { QuestionSelectComponent } from './question-select/question-select.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EditQuestionFormComponent } from './edit-question-form/edit-question-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeScreenComponent,
     QuestionComponent,
     QuestionFormComponent,
-    QuestionSelectComponent
+    QuestionSelectComponent,
+    EditQuestionFormComponent
   ],
   imports: [
     BrowserModule,

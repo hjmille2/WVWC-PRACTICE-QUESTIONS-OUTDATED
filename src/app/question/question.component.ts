@@ -45,13 +45,18 @@ export class QuestionComponent implements OnInit {
     this.mult_choice_options.push(this.questionSpecific.opt_2); 
     this.mult_choice_options.push(this.questionSpecific.opt_3); 
 
+
     //get rid of nulls
     this.mult_choice_options = this.mult_choice_options.filter(function(el) {
-      return el != null; 
+      return (el != null); 
+    }).filter(function(el){
+      return el != "null"; 
     }); 
+
 
     this.mult_choice_options = this.shuffleArray(this.mult_choice_options); 
   }
+
 
   //make sure the options arent always in the same order with correct ans first
   shuffleArray(array){
