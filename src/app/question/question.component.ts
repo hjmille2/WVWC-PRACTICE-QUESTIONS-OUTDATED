@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { QuestionService } from '../services/question.service'; 
 import { Location } from '@angular/common'; 
 import { QuestionsCrudService } from '../services/questions-crud.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-question',
@@ -21,7 +22,7 @@ export class QuestionComponent implements OnInit {
 
   mult_choice_options = []; 
 
-  constructor(private qService : QuestionService, private _location: Location, private questionCrudService: QuestionsCrudService) {
+  constructor(private qService : QuestionService, private _location: Location, private questionCrudService: QuestionsCrudService, private router : Router) {
     this.showShortAns = false; 
 
     
@@ -30,7 +31,9 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void {
     this.question = this.getQuestion(); 
     this.questionCrudService.getQuestion(this.question.question_type, this.question.question_id).subscribe(
-      value => {
+      value => { 
+        this.qService.setSelectedQuestion(this.question); 
+        this.qService.setSelectedQuestionSpecific(value[0]); 
         this.questionSpecific = value[0];
         if(this.question.question_type === 'mult_choice') {
           this.getMultChoiceInfo(); 
@@ -40,11 +43,11 @@ export class QuestionComponent implements OnInit {
   }
 
   getMultChoiceInfo(){
+
     this.mult_choice_options.push(this.questionSpecific.correct_ans); 
     this.mult_choice_options.push(this.questionSpecific.opt_1); 
     this.mult_choice_options.push(this.questionSpecific.opt_2); 
     this.mult_choice_options.push(this.questionSpecific.opt_3); 
-
 
     //get rid of nulls
     this.mult_choice_options = this.mult_choice_options.filter(function(el) {
@@ -93,7 +96,11 @@ export class QuestionComponent implements OnInit {
   }
 
   backClicked(){
-    this._location.back(); 
+    this.router.navigateByUrl('/questions'); 
+  }
+
+  editButtonClick(){
+    this.router.navigateByUrl('/edit-question'); 
   }
 
 }

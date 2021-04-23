@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+
 import { QuestionsCrudService } from '../services/questions-crud.service';
 import { MultipleChoiceQuestion} from '../models/multChoiceQuestion'; 
 import { Question } from '../models/question';
 import { ShortAnsQuestion } from '../models/shortAnsQuestions';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class QuestionFormComponent implements OnInit {
 
   shortAnsForm : FormGroup; 
 
-  constructor(private formBuilder: FormBuilder, private questionsCrudService : QuestionsCrudService) { 
+  constructor(private formBuilder: FormBuilder, private questionsCrudService : QuestionsCrudService, private route: Router) { 
  
     this.createMultChoiceForm(); 
     this.createShortAnsForm(); 
@@ -91,11 +92,12 @@ export class QuestionFormComponent implements OnInit {
       opt_3 : this.isUndefined(this.multChoiceForm.get('multChoiceOptions').value[2]) ? null : this.multChoiceForm.get('multChoiceOptions').value[2].opt,
       explanation : this.multChoiceForm.get('multChoiceExplanation').value
 
-    }
+    } 
 
     let bodyData = {...q, ...m} //combine both objects to send as json data to express server
     this.questionsCrudService.postMultChoiceQuestion(bodyData).subscribe((result) =>{
       console.log(result); 
+      this.route.navigateByUrl('/')
     }); 
      
   }
@@ -120,6 +122,7 @@ export class QuestionFormComponent implements OnInit {
     let bodyData = {...q, ...a}; //put into one object to pass to body of call
     this.questionsCrudService.postShortAnsQuestion(bodyData).subscribe((result) =>{
       console.log(result); 
+      this.route.navigateByUrl('/')
     }); // have to subscribe to make call
 
   }

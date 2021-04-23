@@ -1,7 +1,9 @@
 
 <div class='questionHeader'>
-    <button class='btn btn-primary backButton' (click)='backClicked()'>Back</button>
-    <h3 class="topic">{{question.class}} - {{question.category}}</h3>
+    <button class='btn btn-primary backButton btn-sm' (click)='backClicked()'>Back</button>
+    <span class="topic">{{question.class}} - {{question.category}}</span>
+
+    <button class='btn btn-primary btn-sm editButton' (click)='editButtonClick()'>Edit</button>
 </div>
 
 <div id="multChoiceQ" *ngIf='question.question_type==="mult_choice"'>

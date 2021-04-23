@@ -36,7 +36,8 @@ export class QuestionsCrudService {
   }
 
   getQuestion(questionType, id): Observable<any[]>{
-    const requestUrl = `${this.url}/${questionType}/${id}`
+    const requestUrl = `${this.url}/${questionType}/${id}`; 
+    console.log(requestUrl); 
     if(questionType === 'mult_choice'){
       return this.http
       .get<MultipleChoiceQuestion[]>(requestUrl, {responseType : 'json'})
@@ -68,6 +69,24 @@ export class QuestionsCrudService {
     return this.http.post(requestUrl, bodyData, this.httpOptions).pipe(
       catchError(
         this.errorHandlerService.handleError<any>('post')
+      )
+    ); 
+  }
+
+  updateQuestion(bodyData, questionType){
+    const requestUrl = `${this.url}/updateQuestion/${questionType}/${bodyData.id}`
+    return this.http.put(requestUrl, bodyData, this.httpOptions).pipe(
+      catchError(
+        this.errorHandlerService.handleError<any>('put')
+      )
+    ); 
+  }
+
+  deleteQuestion(questionType, id){
+    const requestUrl = `${this.url}/deleteQuestion/${questionType}/${id}`; 
+    return this.http.delete(requestUrl, this.httpOptions).pipe(
+      catchError(
+        this.errorHandlerService.handleError<any>('delete')
       )
     ); 
   }

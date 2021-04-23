@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch:'full'},
   {path: 'question', component: QuestionComponent},
   {path: 'add-question', component: QuestionFormComponent},
-  {path: 'edit-quesiton', component: EditQuestionFormComponent}
+  {path: 'edit-question', component: EditQuestionFormComponent}
 ];
 
 @NgModule({

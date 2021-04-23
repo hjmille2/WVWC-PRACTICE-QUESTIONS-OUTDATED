@@ -1,1 +1,105 @@
-<p>edit-question-form works!</p>
+
+<div>
+
+    <div id="QuestionForm">
+        <div class='deleteButton'>
+            <button class='btn btn-danger' (click)='deleteQuestion()'>Delete</button>
+        </div>
+        <div *ngIf="questionType==='mult_choice'">
+            <form [formGroup]='multChoiceForm' (ngSubmit)='submitMultChoiceForm()'>
+                <div class='form-group'>
+                    <label for='MultChoiceClass'>Class:</label>
+                    <input type='text' class='form-control' id='MultChoiceClass' formControlName='multChoiceClass'>
+                </div>
+
+                <div class='form-group'>
+                    <label for='MultChoiceCategory'>Category:</label>
+                    <input type='text' class='form-control' id='MulChoiceCategory' formControlName='multChoiceCategory'>
+                </div>
+                <div class='form-group'>
+                    <label for='multChoiceQuestion'>Question:</label>
+                    <textarea class='form-control' rows='3' required id='multChoiceQuestion' formControlName='multChoiceQuestion'></textarea>
+                </div>
+
+                <div class='form-group'>
+                    <label for='correctAnswerMultChoice'>Correct Answer:</label>
+                    <input type='text' class='form-control' id='correctAnswerMultChoice' formControlName='correctAns'>
+                </div>
+
+                <div class='form-group'>
+                    <table class='table'>
+                        <tr>
+                            <th id='tableHeader'>Other Answer Options:
+                            </th>
+                            
+                            <th class='buttonCell'><button class='btn btn-outline-success btn-sm tableButton' (click)='addOption()' [disabled]='options().length > 2' type='button'>Add</button></th>
+                        </tr>
+                        <tr *ngFor='let o of multChoiceForm.get("multChoiceOptions")["controls"]; let i=index' formArrayName='multChoiceOptions'>
+                            <td [formGroupName] = 'i'>
+                                Option {{i+1}}
+                                <input type='text' class='form-control' formControlName='opt'>
+                            </td>
+                            <td class='buttonCell'>
+                                <button (click)='removeOption(i)' class='btn btn-outline-danger btn-sm tableButton' [disabled]='options().length === 1' type='button'>Remove</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                    </table>
+                </div>
+
+                <div class='form-group'>
+                    <label for='explanationMultChoice'>Explanation</label>
+                    <textarea class='form-control' rows='3' formControlName='multChoiceExplanation'></textarea>
+                </div>
+
+                <button type='submit' class='btn btn-primary submitButton'>Submit</button>
+            </form>
+        </div>
+
+        <div *ngIf="questionType === 'short_ans'">
+            <form [formGroup]='shortAnsForm' (ngSubmit)='submitShortAnsForm()'>
+                <div class='form-group'>
+                    <label for='shortAnsClass'>Class:</label>
+                    <input type='text' class='form-control' id='shortAnsClass' formControlName='shortAnsClass'>
+                </div>
+
+                <div class='form-group'>
+                    <label for='shortAnsCategory'>Category:</label>
+                    <input type='text' class='form-control' id='shortAnsCategory' formControlName='shortAnsCategory'>
+                </div>
+                <div class='form-group'>
+                    <label for='shortAnsQuestion'>Question:</label>
+                    <textarea class='form-control' rows='3' required id='shortAnsQuestion' formControlName='shortAnsQuestion'></textarea>
+                </div>
+
+                <div class='form-group'> 
+                    <label for='shortAnsAnswer'>Answer:</label>
+                    <textarea class='form-control' rows='3' id='shortAnsAnswer' formControlName='shortAnsAnswer'></textarea>
+                </div>
+
+                <div class='form-group'>
+                    <label for='shortAnsExplanation'>Explanation:</label>
+                    <textarea class='form-control' row='3' id='shortAnsExplanation' formControlName='shortAnsExplanation'></textarea>
+                </div>
+
+                <button type='submit' class='btn btn-primary submitButton'>Submit</button>
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+<ng-template #content let-modal>
+    <div class='modal-header'>
+        <button type='button' class='close' (click)="modal.dismiss('cross-click')">
+            <span>&times;</span>
+        </button>
+    </div>
+    <div class='modal-body'>
+        <p>Successfully Deleted!</p>
+    </div>
+    <div class='modal-footer'>
+        <button type='button' class='btn btn-primary' (click)="modal.close('close click')">Close</button>
+    </div>
+</ng-template>
