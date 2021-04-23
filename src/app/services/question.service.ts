@@ -11,7 +11,7 @@ import { ShortAnsQuestion } from '../models/shortAnsQuestions';
 })
 export class QuestionService {
   selectedQuestion : Question; 
-  selectedQuestionSpecific : Observable<any>; 
+  selectedQuestionSpecific; 
   constructor() { }
 
   getQuestion() {
@@ -20,6 +20,14 @@ export class QuestionService {
 
   getQuestionSpecific(){
     return this.selectedQuestionSpecific; 
+  }
+
+  setSelectedQuestion(q){
+    this.selectedQuestion = q; 
+  }
+
+  setSelectedQuestionSpecific(q){
+    this.selectedQuestionSpecific = q; 
   }
 }
 
