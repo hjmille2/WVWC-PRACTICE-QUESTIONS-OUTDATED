@@ -35,9 +35,46 @@ export class QuestionsCrudService {
     ); 
   }
 
+  fetchQuestions(filters): Observable<Question[]> {
+    let requestUrl = `${this.url}/filtered`
+    return this.http.get<Question[]>(requestUrl, {responseType: 'json'}).pipe(
+      tap((_) => console.log('fetched filtered questions')), 
+      catchError(
+        this.errorHandlerService.handleError<Question[]>('fetchFiltered', [])
+      )
+    ); 
+  }
+
+  fetchClasses(): Observable<any[]> {
+    const requestUrl = `${this.url}/classes`; 
+    return this.http.get<any[]>(requestUrl, {responseType: 'json'}).pipe(
+      tap((_) => console.log('fetched the classes')), 
+      catchError(
+        this.errorHandlerService.handleError<any[]>('fetchClasses', [])
+      )
+    ); 
+  }
+
+  fetchQuestionTypes():Observable<any[]>{
+    const requestUrl = `${this.url}/questionTypes`; 
+    return this.http.get<any[]>(requestUrl, {responseType : 'json'}).pipe(
+      tap((_) => console.log('fetched the question types')), 
+      catchError(
+        this.errorHandlerService.handleError<any[]>('fetchQuestionTypes', [])
+      )
+    ); 
+  }
+
+  fetchCategories(): Observable<any[]>{
+    const requestUrl = `${this.url}/categories`; 
+    return this.http.get<any[]>(requestUrl, {responseType: 'json'}).pipe(
+      tap( (_) => console.log('fetched categories')),
+      catchError(this.errorHandlerService.handleError<any[]>('fetchedCategories', []))
+    ); 
+  }
+
   getQuestion(questionType, id): Observable<any[]>{
     const requestUrl = `${this.url}/${questionType}/${id}`; 
-    console.log(requestUrl); 
     if(questionType === 'mult_choice'){
       return this.http
       .get<MultipleChoiceQuestion[]>(requestUrl, {responseType : 'json'})

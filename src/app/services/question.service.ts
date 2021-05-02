@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs'; 
 
 import { MultipleChoiceQuestion } from '../models/multChoiceQuestion'; 
 import { Question } from '../models/question';
@@ -11,7 +10,7 @@ import { ShortAnsQuestion } from '../models/shortAnsQuestions';
 })
 export class QuestionService {
   selectedQuestion : Question; 
-  selectedQuestionSpecific; 
+  selectedQuestionSpecific; //will be either ShortAnsQuestion or MultipleChoiceQuestion
   constructor() { }
 
   getQuestion() {
