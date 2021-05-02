@@ -3,10 +3,35 @@
 <div id="Homescreen-Body">
     <h2>Welcome! Please select an option below:</h2>
     <div class='questionSelect'>
-        <select class='form-select' id='questionSelectDrop'>
-            <option selected>Please choose from the following</option>
-            <option value='allQuestions'>Show all questions</option>
-        </select>
+        
+        <div class='questionType'>
+            <p>Question Types:</p>
+            <div *ngFor = 'let qType of filters.questionType' class='questionTypeSelect checkBoxSelection'>
+                <input [(ngModel)]='qType.isSelected' type='checkbox' id='{{qType.questionType}}'>
+                <label for='{{qType.questionType}}'>{{qType.questionType}}</label>
+            </div>
+        </div>
+
+        <div class='qClass'>
+            <p>Class:</p>
+            <div *ngFor = 'let qc of filters.classes' class='qClassSelect checkBoxSelection'>
+                <input [(ngModel)]='qc.isSelected' type='checkbox' id='{{qc.className}}'>
+                <label for='{{qc.className}}'>{{qc.className}}</label>
+
+            </div>
+        </div>
+
+        <div class='qCategory'>
+            <p>Category: </p>
+            <div *ngFor = 'let cat of filters.category' class='qCategory checkBoxSelection'>
+                <input [(ngModel)]='cat.isSelected' type='checkbox' id='{{cat.category}}'>
+                <label for='{{cat.category}}'>{{cat.category}}</label>
+            </div>
+        </div>
+        
+        
+
+
         <button class='btn btn-outline-success' (click)='questionRequest()'>Go</button>
     </div>
 </div>

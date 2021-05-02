@@ -131,8 +131,7 @@ export class EditQuestionFormComponent implements OnInit {
     }
 
     this.questionsCrudService.updateQuestion(bodyData, 'short_ans').subscribe((result)=>{
-      console.log(result); 
-      this.route.navigateByUrl('/question'); 
+      this.route.navigateByUrl('/questions'); 
     }); 
   }
 
@@ -150,8 +149,7 @@ export class EditQuestionFormComponent implements OnInit {
     }; 
 
     this.questionsCrudService.updateQuestion(bodyData, 'mult_choice').subscribe((result)=>{
-      console.log(result); 
-      this.route.navigateByUrl('/question'); 
+      this.route.navigateByUrl('/questions'); 
     }); 
   }
 
@@ -162,7 +160,6 @@ export class EditQuestionFormComponent implements OnInit {
   deleteQuestion(){
     if(confirm("Are you sure you want to permanently delete this question?")){
       this.questionsCrudService.deleteQuestion(this.selectedQuestion.question_type, this.selectedQuestion.question_id).subscribe((result)=>{
-        console.log(result);  
         this.route.navigateByUrl('/questions')
       }); 
     }

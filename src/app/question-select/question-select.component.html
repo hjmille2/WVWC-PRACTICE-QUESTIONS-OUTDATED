@@ -1,6 +1,9 @@
 <div>
+    <div *ngIf='questions.length === 0'>
+        <p>Sorry, nothing matched your filters</p>
+    </div>
     <ul >
-        <li *ngFor='let q of questions$ | async;'><a routerLink='/question' (click)='openQuestion(q)'>{{q.question}}</a></li>
+        <li *ngFor='let q of questions'><a routerLink='/question' (click)='openQuestion(q)'>{{q.question}}</a></li>
     </ul>
 </div>
 
