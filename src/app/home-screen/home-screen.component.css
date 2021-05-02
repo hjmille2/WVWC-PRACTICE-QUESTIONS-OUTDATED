@@ -1,7 +1,11 @@
 .questionSelect {
-    display: flex; 
+    display: inline-block; 
 }
 
 #questionSelectDrop{
     width: 400px; 
+}
+
+.checkBoxSelection{
+    margin-left: 50px;
 }

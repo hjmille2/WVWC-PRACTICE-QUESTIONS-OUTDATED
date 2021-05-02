@@ -1,14 +1,10 @@
 
 <div>
-    <div id="SelectQType">
-        <select class='custom-select' [(ngModel)]='questionType'>
-            <option value='mult_choice'>Multiple Choice</option>
-            <option value='short_ans'>Short Answer</option>
-        </select>
-
-    </div>
 
     <div id="QuestionForm">
+        <div class='deleteButton'>
+            <button class='btn btn-danger' (click)='deleteQuestion()'>Delete</button>
+        </div>
         <div *ngIf="questionType==='mult_choice'">
             <form [formGroup]='multChoiceForm' (ngSubmit)='submitMultChoiceForm()'>
                 <div class='form-group'>
@@ -93,3 +89,5 @@
     </div>
     
 </div>
+
+

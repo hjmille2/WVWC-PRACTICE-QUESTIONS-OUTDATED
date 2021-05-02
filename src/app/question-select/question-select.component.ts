@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs'; 
 
 import { Question } from '../models/question';
+import { FiltersService } from '../services/filters.service';
 
 import { QuestionService } from '../services/question.service';
 import { QuestionsCrudService } from '../services/questions-crud.service';
@@ -15,13 +16,32 @@ import { QuestionsCrudService } from '../services/questions-crud.service';
 })
 export class QuestionSelectComponent implements OnInit {
 
-  questions$: Observable<Question[]>;
+  questions: any[];
+  filters; 
   selected: boolean;  
 
-  constructor(private router : Router, private questionCrudService: QuestionsCrudService, private qService : QuestionService) { }
+  constructor(private filterService : FiltersService, private questionCrudService: QuestionsCrudService, private qService : QuestionService) { }
 
   ngOnInit(): void {
-    this.questions$ = this.questionCrudService.fetchAll();  
+    this.questions = []; 
+    this.filters = this.filterService.getFilters(); 
+    this.questionCrudService.fetchAll().subscribe((result) => {
+      result.forEach( q => {
+        if(this.validQuestion(q)){
+          this.questions.push(q); 
+        }; 
+      }) 
+    });  
+  }
+
+  validQuestion(q) : boolean { 
+    if(this.filters.questionType.includes(q.question_type) && this.filters.category.includes(q.category) && this.filters.class.includes(q.class)){
+      return true; 
+    } 
+    else{
+      return false; 
+    }
+
   }
 
   openQuestion(q){

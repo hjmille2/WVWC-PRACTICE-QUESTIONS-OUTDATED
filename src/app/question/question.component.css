@@ -13,11 +13,20 @@
 }
 
 .questionHeader {  
-    display: flex; 
+    display: inline; 
+    width: 100%; 
 }
 
 .shortAnswerSolution{
     margin-top: 50px; 
 }
 
+.editButton {
+    float: right; 
+}
+
+.topic {
+    font-size: 25px;
+    font-weight: bold; 
+}
 
