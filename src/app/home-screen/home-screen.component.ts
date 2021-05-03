@@ -57,7 +57,6 @@ export class HomeScreenComponent implements OnInit {
        }); 
      })); 
 
-     console.log(this.filters); 
   }
 
   questionRequest(){
